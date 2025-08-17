@@ -1,0 +1,104 @@
+{
+  "$id": "/objects/experimental-variogram/1.0.0/experimental-variogram.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Experimental variogram object representing spatial continuity statistics grouped by direction and lag.",
+  "type": "object",
+  "allOf": [
+    {"$ref": "/components/base-object-properties/1.1.0/base-object-properties.schema.json"},
+    {
+      "properties": {
+        "schema": {"const": "/objects/experimental-variogram/1.0.0/experimental-variogram.schema.json"},
+        "domain": {
+          "title": "Domain",
+          "description": "The domain the experimental variogram is calculated for.",
+          "type": "string"
+        },
+        "attribute": {
+          "title": "Attribute",
+          "description": "The attribute the experimental variogram is calculated for.",
+          "type": "string"
+        },
+        "geometry": {
+          "description": " data (start, end, value, num_pairs) and optional per-lag attributes (e.g. weights).",
+          "allOf": [
+            {"$ref": "/components/attribute-list-property/1.2.0/attribute-list-property.schema.json", 
+            "description": "Attributes associated with each lag (length must match lag core data length)."},
+            {
+              "properties": {
+                "data": {
+                  "description": "Binary blob reference for lag table. Columns: start, end, value, num_pairs",
+                  "$ref": "/elements/binary-blob/1.0.1/binary-blob.schema.json"
+                },
+                "length": {"type": "integer", "minimum": 0, "description": "Number of lag rows."},
+                "width": {"const": 4, "description": "Number of columns (fixed)."},
+                "data_type": {"const": "float64/float64/float64/uint64",
+                "description": "Data types for columns."}
+              },
+              "required": ["data", "length", "width", "data_type"]
+            }
+          ]
+        },
+        "directions": {
+          "description": "Direction table (azimuth, dip, count, offset) and optional attributes. The count and offset reference slices in the lag table.",
+          "allOf": [
+            {"$ref": "/components/attribute-list-property/1.2.0/attribute-list-property.schema.json", "description": "Attributes associated with each direction (length must match direction table length)."},
+            {
+              "properties": {
+                "data": {
+                  "description": "Binary blob reference for direction table. Columns: azimuth, dip, count, offset",
+                  "$ref": "/elements/binary-blob/1.0.1/binary-blob.schema.json"
+                },
+                "length": {"type": "integer", "minimum": 0, "description": "Number of directions."},
+                "width": {"const": 4, "description": "Number of columns (fixed)."},
+                "data_type": {"const": "float64/float64/uint64/uint64", "description": "Data types for columns."},
+                "parameters": {
+                  "description": "Optional parameter defaults and overrides for directions (hybrid option B design).",
+                  "type": "object",
+                  "properties": {
+                    "defaults": {
+                      "type": "object",
+                      "description": "Default cone and lag parameters applied to standard directions.",
+                      "properties": {
+                        "angle_tolerance": {"type": ["number", "null"]},
+                        "angle_tolerance2": {"type": ["number", "null"]},
+                        "bandwidth": {"type": ["number", "null"]},
+                        "bandwidth2": {"type": ["number", "null"]},
+                        "lag_spacing": {"type": ["number", "null"]},
+                        "lag_tolerance": {"type": ["number", "null"]}
+                      },
+                      "additionalProperties": false
+                    },
+                    "specific": {
+                      "type": "array",
+                      "description": "List of parameter overrides or special direction types keyed by index.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "index": {"type": "integer", "minimum": 0},
+                          "type": {"type": "string", "enum": ["downhole", "omni"]},
+                          "angle_tolerance": {"type": ["number", "null"]},
+                          "angle_tolerance2": {"type": ["number", "null"]},
+                          "bandwidth": {"type": ["number", "null"]},
+                          "bandwidth2": {"type": ["number", "null"]},
+                          "lag_spacing": {"type": ["number", "null"]},
+                          "lag_tolerance": {"type": ["number", "null"]}
+                        },
+                        "required": ["index"],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": ["defaults"],
+                  "additionalProperties": false
+                }
+              },
+              "required": ["data", "length", "width", "data_type"]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "required": ["schema", "lags", "directions"],
+  "unevaluatedProperties": false
+}
