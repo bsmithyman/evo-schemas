@@ -41,7 +41,8 @@
         "directions": {
           "description": "Direction table (azimuth, dip, count, offset) and optional attributes. The count and offset reference slices in the lag table.",
           "allOf": [
-            {"$ref": "/components/attribute-list-property/1.2.0/attribute-list-property.schema.json", "description": "Attributes associated with each direction (length must match direction table length)."},
+            {"$ref": "/components/attribute-list-property/1.2.0/attribute-list-property.schema.json", 
+            "description": "Attributes associated with each direction (length must match direction table length)."},
             {
               "properties": {
                 "data": {
@@ -50,47 +51,8 @@
                 },
                 "length": {"type": "integer", "minimum": 0, "description": "Number of directions."},
                 "width": {"const": 4, "description": "Number of columns (fixed)."},
-                "data_type": {"const": "float64/float64/uint64/uint64", "description": "Data types for columns."},
-                "parameters": {
-                  "description": "Optional parameter defaults and overrides for directions (hybrid option B design).",
-                  "type": "object",
-                  "properties": {
-                    "defaults": {
-                      "type": "object",
-                      "description": "Default cone and lag parameters applied to standard directions.",
-                      "properties": {
-                        "angle_tolerance": {"type": ["number", "null"]},
-                        "angle_tolerance2": {"type": ["number", "null"]},
-                        "bandwidth": {"type": ["number", "null"]},
-                        "bandwidth2": {"type": ["number", "null"]},
-                        "lag_spacing": {"type": ["number", "null"]},
-                        "lag_tolerance": {"type": ["number", "null"]}
-                      },
-                      "additionalProperties": false
-                    },
-                    "specific": {
-                      "type": "array",
-                      "description": "List of parameter overrides or special direction types keyed by index.",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "index": {"type": "integer", "minimum": 0},
-                          "type": {"type": "string", "enum": ["downhole", "omni"]},
-                          "angle_tolerance": {"type": ["number", "null"]},
-                          "angle_tolerance2": {"type": ["number", "null"]},
-                          "bandwidth": {"type": ["number", "null"]},
-                          "bandwidth2": {"type": ["number", "null"]},
-                          "lag_spacing": {"type": ["number", "null"]},
-                          "lag_tolerance": {"type": ["number", "null"]}
-                        },
-                        "required": ["index"],
-                        "additionalProperties": false
-                      }
-                    }
-                  },
-                  "required": ["defaults"],
-                  "additionalProperties": false
-                }
+                "data_type": {"const": "float64/float64/uint64/uint64", 
+                "description": "Data types for columns."}
               },
               "required": ["data", "length", "width", "data_type"]
             }
