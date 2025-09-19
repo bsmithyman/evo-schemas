@@ -1,0 +1,50 @@
+import CheckIcon from '@mui/icons-material/Check';
+import Chip from '@mui/material/Chip';
+import Grid from '@mui/material/Grid';
+import SchemaUri from '@theme/SchemaUri';
+import FlatProperties from './_generated/flatmd/objects/variogram-1.2.0.md';
+
+<Grid container>
+# variogram
+<Chip color="info" icon={<CheckIcon />} label="Supported" style={{margin: '0.75em'}} />
+</Grid>
+<SchemaUri uri="schema/objects/experimental-variogram/1.0.0/experimental-variogram.schema.json" />
+
+The experimental-variogram object is used to capture spatial variability of univariate data acorss an area of interest. Spatial variability is described by direction and summarized per each lag in a direction. 
+
+The experimental variogram is calculated a part of a standard variography workflow and is precursor to variogram modeling. An experimental variogram is a key input to fitting a variogram model.
+
+## Required Data
+
+To construct an experimental variogram object the following information is required.
+
+* `data_variance` (number): The variance of the source data
+
+* `generator` (string): Identifier for the calculation engine/software
+
+* `lags` (object): Contains:
+
+    * `data`(binary blob): Table with columns: start, end, value, num_pairs
+    * `length` (integer): Total number of lag bins
+    * `width` (const): Must be 4
+    * `data_type` (const): Must be "float64/float64/float64/uint64"
+    * `directions` (object): Contains:
+
+* `data` (binary blob): Table with columns: azimuth, dip, count, offset,angle_tolerance, angle_tolerance2, bandwidth, bandwidth2, lag_spacing, lag_tolerance
+* `length` (integer): Number of directions
+* `width` (const): Must be 10
+* `data_type` (const): Must be "float64/float64/uint64/uint64/float64/float64/float64/*float64/float64/float64"
+
+## Optional fields include:
+
+* `description` (string)
+* `domain` (string): The domain the variogram is calculated for
+* `attribute` (string): The attribute the variogram is calculated for
+* `variogram_type` (string, default: "variogram"): Type of calculation performed Both lags and directions can also have optional additional attributes through the  attribute-list-property component.
+
+The schema enforces unevaluatedProperties: false, meaning no additional properties beyond those defined are allowed.
+## Properties
+
+<FlatProperties />
+
+::mermaid[_generated/uml/experimental-variogram-1.0.0.mmd]
