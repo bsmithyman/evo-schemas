@@ -11,13 +11,13 @@
   "lags": {
     "data": "abababababababababababababababababababababababababababababababab",
     "length": 6,
-    "width": 4,
-    "data_type": "float64/float64/float64/uint64"
+    "width": 8,
+    "data_type": "uint64/uint64/float64/float64/float64/float64/float64/uint64"
   },
   "directions": {
     "data": "abababababababababababababababababababababababababababababababab",
-    "data_type": "float64/float64/uint64/uint64/float64/float64/float64/float64/float64/float64",
+    "data_type": "uint64/string/uint64/float64/float64/float64/float64/float64/float64",
     "length": 2,
-    "width": 10
+    "width": 9
   }
 }

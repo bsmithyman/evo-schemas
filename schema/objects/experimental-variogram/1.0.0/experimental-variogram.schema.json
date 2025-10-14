@@ -35,7 +35,7 @@
           "default": "variogram"
         },
         "lags": {
-          "description": "A data-table containing the calculated values for each lag bin. The data is indexed by the 'offset' and 'count' fields in the directions table.",
+          "description": "A data-table containing the calculated values for each lag bin. The data is indexed by the 'direction_id' (from the directions table) and 'lag_number'.",
           "allOf": [
             {
               "$ref": "/components/attribute-list-property/1.2.0/attribute-list-property.schema.json",
@@ -45,7 +45,7 @@
               "type": "object",
               "properties": {
                 "data": {
-                  "description": "Binary blob reference for the lag data table. The columns must be: start, end, value, num_pairs.",
+                  "description": "Binary blob reference for the lag data table. The columns must be: direction_id, lag_number, lag_distance, lag_tolerance, start, end, value, num_pairs.",
                   "$ref": "/elements/binary-blob/1.0.1/binary-blob.schema.json"
                 },
                 "length": {
@@ -55,11 +55,11 @@
                 },
                 "width": {
                   "description": "Number of columns in the core lag data table.",
-                  "const": 4
+                  "const": 8
                 },
                 "data_type": {
                   "description": "Data types for the core lag data columns.",
-                  "const": "float64/float64/float64/uint64"
+                  "const": "uint64/uint64/float64/float64/float64/float64/float64/uint64"
                 }
               },
               "required": [
@@ -82,7 +82,7 @@
               "type": "object",
               "properties": {
                 "data": {
-                  "description": "Binary blob reference for the directions data table. Columns: azimuth, dip, count, offset, angle_tolerance, angle_tolerance2, bandwidth, bandwidth2, lag_spacing, lag_tolerance.",
+                  "description": "Binary blob reference for the directions data table. Columns: direction_id, direction_type, nlags, azimuth, dip, azimuth_tolerance, dip_tolerance, bandwidth, bandheight.",
                   "$ref": "/elements/binary-blob/1.0.1/binary-blob.schema.json"
                 },
                 "length": {
@@ -92,11 +92,11 @@
                 },
                 "width": {
                   "description": "Number of columns in the core directions data table.",
-                  "const": 10
+                  "const": 9
                 },
                 "data_type": {
                   "description": "Data types for the core directions columns.",
-                  "const": "float64/float64/uint64/uint64/float64/float64/float64/float64/float64/float64"
+                  "const": "uint64/string/uint64/float64/float64/float64/float64/float64/float64"
                 }
               },
               "required": [

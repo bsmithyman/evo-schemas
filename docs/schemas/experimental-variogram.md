@@ -22,18 +22,19 @@ To construct an experimental variogram object the following information is requi
 
 * `generator` (string): Identifier for the calculation engine/software
 
-* `lags` (object): Contains:
+* `lags` (object): Table describing individual lags
 
-    * `data`(binary blob): Table with columns: start, end, value, num_pairs
+    * `data`(binary blob): Table with columns: direction_id, lag_number, lag_distance, lag_tolerance, start, end, value, num_pairs.
     * `length` (integer): Total number of lag bins
     * `width` (const): Must be 4
     * `data_type` (const): Must be "float64/float64/float64/uint64"
     * `directions` (object): Contains:
 
-* `data` (binary blob): Table with columns: azimuth, dip, count, offset,angle_tolerance, angle_tolerance2, bandwidth, bandwidth2, lag_spacing, lag_tolerance
-* `length` (integer): Number of directions
-* `width` (const): Must be 10
-* `data_type` (const): Must be "float64/float64/uint64/uint64/float64/float64/float64/*float64/float64/float64"
+* `directions` (object): Table describing geometry and type ("directional", "omnidirectional" or "downhole") of each direction for which lags exist.
+    * `data` (binary blob): Table with columns: direction_id, direction_type, nlags, azimuth, dip, azimuth_tolerance, dip_tolerance, bandwidth, bandheight.
+    * `length` (integer): Number of directions
+    * `width` (const): Must be 10
+    * `data_type` (const): Must be "float64/float64/uint64/uint64/float64/float64/float64/*float64/float64/float64"
 
 ## Optional fields include:
 
