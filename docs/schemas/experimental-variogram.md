@@ -2,7 +2,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
 import SchemaUri from '@theme/SchemaUri';
-import FlatProperties from './_generated/flatmd/objects/variogram-1.2.0.md';
+import FlatProperties from './_generated/flatmd/objects/experimental-variogram-1.0.0.md';
+
 
 <Grid container>
 # variogram
