@@ -1,14 +1,11 @@
-import CheckIcon from '@mui/icons-material/Check';
-import Chip from '@mui/material/Chip';
-import Grid from '@mui/material/Grid';
+import OverlineWithVersion from '@theme/OverlineWithVersion';
 import SchemaUri from '@theme/SchemaUri';
 import FlatProperties from './_generated/flatmd/objects/experimental-variogram-1.0.0.md';
 
+<OverlineWithVersion title="Geoscience Objects" version="1.0.0" badge="techPreview" />
 
-<Grid container>
 # variogram
-<Chip color="info" icon={<CheckIcon />} label="Supported" style={{margin: '0.75em'}} />
-</Grid>
+
 <SchemaUri uri="schema/objects/experimental-variogram/1.0.0/experimental-variogram.schema.json" />
 
 The experimental-variogram object is used to capture spatial variability of univariate data acorss an area of interest. Spatial variability is described by direction and summarized per each lag in a direction. 
