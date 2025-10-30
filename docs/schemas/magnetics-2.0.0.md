@@ -4,8 +4,6 @@ import FlatProperties from './_generated/flatmd/objects/magnetics-2.0.0.md';
 
 <OverlineWithVersion title="Geoscience Objects" version="2.0.0" badge="techPreview" />
 
-<OverlineWithVersion title="Geoscience Objects" version="1.2.0" badge="supported" />
-
 # magnetics
 
 <SchemaUri uri="schema/objects/magnetics/2.0.0/magnetics.schema.json" />
