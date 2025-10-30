@@ -4,6 +4,8 @@ import FlatProperties from './_generated/flatmd/objects/radiometric-2.0.0.md';
 
 <OverlineWithVersion title="Geoscience Objects" version="2.0.0" badge="techPreview" />
 
+<OverlineWithVersion title="Geoscience Objects" version="1.2.0" badge="supported" />
+
 # radiometric
 
 <SchemaUri uri="schema/objects/radiometric/2.0.0/radiometric.schema.json" />
